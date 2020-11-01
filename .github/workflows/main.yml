@@ -1,5 +1,5 @@
 name: Procursus CI
-on: push
+on: [push]
 
 jobs:
   build:
