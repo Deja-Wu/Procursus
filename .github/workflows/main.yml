@@ -14,7 +14,7 @@ jobs:
       with:
         xcode-version: '11.7'
     - name: Install dependencies
-      run: brew install bash golang dpkg zstd docbook-xsl fakeroot coreutils findutils gpatch groff gnu-sed gnu-tar python@3.9 bash wget gnupg ldid libtool cmake pkg-config automake gettext ncurses bison flex po4a make
+      run: brew install bash golang dpkg zstd docbook-xsl fakeroot coreutils findutils gpatch groff gnu-sed gnu-tar python@3.9 wget gnupg ldid libtool cmake pkg-config automake gettext ncurses bison flex po4a make
     - name: Find changed/added makefiles
       id: changed_added_makefiles
       uses: lots0logs/gh-action-get-changed-files@2.1.4
@@ -23,5 +23,5 @@ jobs:
     - name: Build any changed/added packages
       run: echo $added_packages $changed_packages
       env:
-        added_packages: ${{ steps.changed_added_makefiles.output.added }}
-        changed_packages: ${{ steps.changed_added_makefiles.output.modified }}
+        added_packages: ${{ steps.changed_added_makefiles.outputs.added }}
+        changed_packages: ${{ steps.changed_added_makefiles.outputs.modified }}
