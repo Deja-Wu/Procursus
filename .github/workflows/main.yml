@@ -1,5 +1,9 @@
 name: Procursus CI
-on: [push]
+on: 
+  push:
+    branches:
+      - master
+      - github-actions
 
 jobs:
   build:
