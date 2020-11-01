@@ -24,4 +24,3 @@ jobs:
       with:
         added-packages: ${{ parseJSON(steps.changed_added_makefiles.output.added) }}
         changed-packages: ${{ parseJSON(steps.changed_added_makefiles.output.modified) }}
-steps.build_package.outputs
