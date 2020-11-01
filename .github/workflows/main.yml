@@ -21,7 +21,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Build any changed/added packages
-      run: echo $INPUT_ADDED_PACKAGES
-      with:
+      run: echo $added_packages
+      env:
         added_packages: ${{ parseJSON(steps.changed_added_makefiles.output.added) }}
         changed_packages: ${{ parseJSON(steps.changed_added_makefiles.output.modified) }}
