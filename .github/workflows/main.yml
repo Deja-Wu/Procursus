@@ -1,0 +1,29 @@
+name: Procursus CI
+on: push
+
+jobs:
+  check-for-packages:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+
+  build:
+    needs: job2
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '11.7'
+    - name: Install dependencies
+      run: brew install bash golang dpkg zstd docbook-xsl fakeroot coreutils findutils gpatch groff gnu-sed gnu-tar python@3.9 bash wget gnupg ldid libtool cmake pkg-config automake gettext ncurses bison flex po4a make
+    - name: Find changed/added makefiles
+      id: changed_added_makefiles
+      uses: lots0logs/gh-action-get-changed-files@2.1.4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build any changed/added packages
+      with:
+        added-packages: ${{ parseJSON(steps.changed_added_makefiles.output.added) }}
+        changed-packages: ${{ parseJSON(steps.changed_added_makefiles.output.modified) }}
+steps.build_package.outputs
